@@ -35,7 +35,7 @@ public class BankSystem {
                 createAccount();
                 break;
             case TWO:
-
+                deposit();
                 break;
             case THREE:
 
@@ -83,6 +83,35 @@ public class BankSystem {
         }
         return null;
     }
+
+    private void deposit() {
+        String accountNumber;
+        Account account = null;
+        while (account == null) {
+            accountNumber = InputView.inputAccountNumber();
+            account = findAccountByNumber(accountNumber);
+
+            if (account == null) {
+                OutputView.printErrorMessage("입력하신 계좌 번호는 존재하지 않습니다. 다시 입력해주세요.");
+            }
+        }
+
+        long money = InputView.inputMoney();
+        account.setAmount(money);
+        OutputView.showDepositSuccess(money, account.getAmount());
+    }
+
+    private Account findAccountByNumber(String accountNumber) {
+        for (User user : users) {
+            for (Account account : user.getAccounts()) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    return account;
+                }
+            }
+        }
+        return null;
+    }
+
 
     public List<User> getUsers() {
         return this.users;

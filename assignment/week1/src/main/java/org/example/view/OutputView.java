@@ -27,4 +27,9 @@ public class OutputView {
             System.out.println("계좌 번호는 " + accountNumber + "입니다.");
         }
     }
+
+    public static void showDepositSuccess(Long money, Long amount) {
+        System.out.println("입금액: " + money);
+        System.out.println("잔액: " + amount);
+    }
 }

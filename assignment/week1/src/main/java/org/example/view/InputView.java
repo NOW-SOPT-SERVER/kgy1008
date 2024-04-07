@@ -5,8 +5,10 @@ import org.example.domain.BankMenu;
 import java.util.Scanner;
 
 public class InputView {
-    private static final String INPUT_MENU = "이용하실 메뉴 번호를 입력해주세요.";
-    private static final String INPUT_INFORMATION = "실명정보 확인을 위해 이름과 주민등록번호를 입력하세요.";
+    private static final String INPUT_MENU = "이용하실 메뉴 번호를 입력해주세요. ";
+    private static final String INPUT_INFORMATION = "실명정보 확인을 위해 이름과 주민등록번호를 입력하세요. ";
+    private static final String INPUT_ACCOUNT = "입금하실 계좌번호를 입력해주세요. ";
+    private static final String INPUT_MONEY = "입금하실 금액을 입력해주세요. ";
 
     public static int showBankMenu(){
         Scanner scanner = new Scanner(System.in);
@@ -30,5 +32,17 @@ public class InputView {
         System.out.print("주민번호: ");
         String registrationNumber = scanner.nextLine();
         return registrationNumber;
+    }
+
+    public static String inputAccountNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(INPUT_ACCOUNT);
+        return scanner.nextLine();
+    }
+
+    public static Long inputMoney() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(INPUT_MONEY);
+        return scanner.nextLong();
     }
 }
