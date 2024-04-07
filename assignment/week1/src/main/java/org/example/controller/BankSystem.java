@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.domain.Account;
-import org.example.domain.AccountNumberGenerator;
+import org.example.domain.UniqueAccountGenerator;
 import org.example.domain.BankMenu;
 import org.example.domain.User;
 import org.example.view.InputView;
@@ -53,11 +53,10 @@ public class BankSystem {
         return menu;
     }
 
-
     private void createAccount() {
         String accountHolder = InputView.inputName();
         String registrationNumber = InputView.inputRegistrationNumber();
-        String accountNumber = AccountNumberGenerator.generateAccountNumber();
+        String accountNumber = UniqueAccountGenerator.generateUniqueAccountNumber();
         Account account = new Account(accountNumber);
         boolean flag = false;
 
