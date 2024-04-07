@@ -2,12 +2,18 @@ package org.example.domain;
 
 public class Account {
     private String accountNumber;
-    private String accountHolder;
     private Long deposit;
 
-    public Account(String accountNumber, String accountHolder, Long deposit) {
+    public Account(String accountNumber) {
         this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
-        this.deposit = deposit;
+        this.deposit = 0L;
+    }
+
+    public String getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public Long getDeposit() {
+        return this.deposit;
     }
 }
