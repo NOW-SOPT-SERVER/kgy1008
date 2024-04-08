@@ -1,7 +1,5 @@
 package org.example.repository;
 
-import org.example.domain.Account;
-
 import java.util.List;
 
 public class User {

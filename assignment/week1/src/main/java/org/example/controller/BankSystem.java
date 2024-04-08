@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.domain.Account;
+import org.example.repository.Account;
 import org.example.domain.UniqueAccountGenerator;
 import org.example.domain.BankMenu;
 import org.example.repository.User;
@@ -44,7 +44,7 @@ public class BankSystem {
 
                 break;
             case FIVE:
-
+                displayAccount();
                 break;
             case EXIT:
                 OutputView.exitSystem();
@@ -145,6 +145,12 @@ public class BankSystem {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
+    }
+
+    private void displayAccount() {
+        String registrationNumber = InputView.inputRegistrationNumber();
+        User currentUser = findUserByRegistrationNumber(registrationNumber);
+        OutputView.showAccountInformation(currentUser);
     }
 
     public List<User> getUsers() {
