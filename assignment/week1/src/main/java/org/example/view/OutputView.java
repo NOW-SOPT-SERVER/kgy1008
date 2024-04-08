@@ -32,4 +32,9 @@ public class OutputView {
         System.out.println("입금액: " + money);
         System.out.println("잔액: " + amount);
     }
+
+    public static void showWithdrawSuccess(Long money, Long amount) {
+        System.out.println("출금액: " + money);
+        System.out.println("잔액: " + amount);
+    }
 }

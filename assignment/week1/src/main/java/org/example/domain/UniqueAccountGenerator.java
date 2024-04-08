@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import org.example.controller.BankSystem;
+import org.example.repository.User;
 
 import java.util.*;
 

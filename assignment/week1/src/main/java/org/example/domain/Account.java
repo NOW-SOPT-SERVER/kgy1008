@@ -17,11 +17,28 @@ public class Account {
         return this.amount;
     }
 
-    public void setAmount(Long amount) {
-        if (amount > 0) {
+    public void setAmount(Long amount, boolean flag) {
+        Long money = this.amount;
+        if (flag) {
             this.amount += amount;
-        } else {
-            throw new IllegalArgumentException("입금 금액은 0보다 커야합니다.");
+        }
+        else {
+            money -= amount;
+            if (money >= 0) {
+                this.amount = money;
+            }
+            else {
+                throw new IllegalArgumentException("한도 초과 입니다.");
+            }
+        }
+    }
+
+    public static Long validateAmount(Long amount) {
+        if (amount >= 0) {
+            return amount;
+        }
+        else {
+            throw new IllegalArgumentException("0보다 큰 금액을 입력해주세요.");
         }
     }
 }

@@ -3,7 +3,7 @@ package org.example.controller;
 import org.example.domain.Account;
 import org.example.domain.UniqueAccountGenerator;
 import org.example.domain.BankMenu;
-import org.example.domain.User;
+import org.example.repository.User;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
@@ -38,7 +38,7 @@ public class BankSystem {
                 deposit();
                 break;
             case THREE:
-
+                withdraw();
                 break;
             case FOUR:
 
@@ -96,8 +96,19 @@ public class BankSystem {
             }
         }
 
-        long money = InputView.inputMoney();
-        account.setAmount(money);
+        long money = 0L;
+        boolean isValidAmount = false;
+        while (!isValidAmount) {
+            try {
+                money = InputView.inputMoney(account.getAmount());
+                Account.validateAmount(money);
+                isValidAmount = true;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e.getMessage());
+            }
+        }
+
+        account.setAmount(money,true);
         OutputView.showDepositSuccess(money, account.getAmount());
     }
 
@@ -112,6 +123,33 @@ public class BankSystem {
         return null;
     }
 
+    private void withdraw() {
+        String accountNumber;
+        Account account = null;
+        while (account == null) {
+            accountNumber = InputView.inputAccountNumber();
+            account = findAccountByNumber(accountNumber);
+
+            if (account == null) {
+                OutputView.printErrorMessage("입력하신 계좌 번호는 존재하지 않습니다. 다시 입력해주세요.");
+            }
+        }
+
+        long money = 0L;
+        boolean isValidAmount = false;
+        while (!isValidAmount) {
+            try {
+                money = InputView.inputMoney(account.getAmount());
+                Account.validateAmount(money);
+                isValidAmount = true;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e.getMessage());
+            }
+        }
+
+        account.setAmount(money,false);
+        OutputView.showWithdrawSuccess(money, account.getAmount());
+    }
 
     public List<User> getUsers() {
         return this.users;
