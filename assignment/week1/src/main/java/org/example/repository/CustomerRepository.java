@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.domain.Account;
 import org.example.domain.User;
 
 import java.util.ArrayList;
@@ -16,6 +17,17 @@ public class CustomerRepository {
         for (User user : users) {
             if (user.getRegistrationNumber().equals(registrationNumber)) {
                 return user;
+            }
+        }
+        return null;
+    }
+
+    public Account findAccountByNumber(String accountNumber) {
+        for (User user : users) {
+            for (Account account : user.getAccounts()) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    return account;
+                }
             }
         }
         return null;
