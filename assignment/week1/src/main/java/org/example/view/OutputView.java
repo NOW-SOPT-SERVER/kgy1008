@@ -1,8 +1,8 @@
 package org.example.view;
 
-import org.example.repository.Account;
+import org.example.domain.Account;
 import org.example.domain.BankMenu;
-import org.example.repository.User;
+import org.example.domain.User;
 
 import java.util.List;
 
@@ -50,8 +50,10 @@ public class OutputView {
             for (Account account : accounts) {
                 System.out.println("계좌 번호: " + account.getAccountNumber());
                 System.out.println("잔액: " + account.getAmount() + "원");
+                System.out.println("=====================");
             }
-        } else {
+        }
+        else {
             System.out.println(user.getName() + "님은 등록된 계좌가 없습니다.");
         }
     }

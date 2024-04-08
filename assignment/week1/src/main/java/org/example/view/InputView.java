@@ -1,7 +1,7 @@
 package org.example.view;
 
 import org.example.domain.BankMenu;
-import org.example.repository.Account;
+import org.example.domain.Account;
 
 import java.util.Scanner;
 

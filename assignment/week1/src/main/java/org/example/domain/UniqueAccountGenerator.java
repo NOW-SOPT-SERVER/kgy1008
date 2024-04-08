@@ -1,8 +1,6 @@
 package org.example.domain;
 
-import org.example.controller.BankSystem;
-import org.example.repository.Account;
-import org.example.repository.User;
+import org.example.repository.CustomerRepository;
 
 import java.util.*;
 
@@ -30,8 +28,8 @@ public class UniqueAccountGenerator {
     }
 
     private static boolean isAccountNumberExist(String accountNumber) {
-        BankSystem bankSystem = new BankSystem();
-        List<User> users = bankSystem.getUsers();
+        CustomerRepository customerRepository = new CustomerRepository();
+        List<User> users = customerRepository.getUsers();
         for (User user : users) {
             for (Account account : user.getAccounts()) {
                 if (account.getAccountNumber().equals(accountNumber)) {

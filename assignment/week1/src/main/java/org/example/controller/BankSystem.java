@@ -1,9 +1,10 @@
 package org.example.controller;
 
-import org.example.repository.Account;
+import org.example.domain.Account;
 import org.example.domain.UniqueAccountGenerator;
 import org.example.domain.BankMenu;
-import org.example.repository.User;
+import org.example.domain.User;
+import org.example.repository.CustomerRepository;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
@@ -11,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankSystem {
-    private List<User> users;
+    private CustomerRepository customers;
 
     public BankSystem() {
-        this.users = new ArrayList<>();
+        this.customers = new CustomerRepository();
     }
     public BankMenu chooseMenu() {
         while (true) {
@@ -60,7 +61,7 @@ public class BankSystem {
         Account account = new Account(accountNumber, accountHolder);
         boolean flag = false;
 
-        User existingUser = findUserByRegistrationNumber(registrationNumber);
+        User existingUser = customers.findUserByRegistrationNumber(registrationNumber);
         if (existingUser != null) {
             flag = true;
             existingUser.getAccounts().add(account);
@@ -70,18 +71,9 @@ public class BankSystem {
             List<Account> accounts = new ArrayList<>();
             accounts.add(account);
             User newUser = new User(accountHolder, registrationNumber, accounts);
-            users.add(newUser);
+            customers.addUser(newUser);
             OutputView.showAccountResult(flag, accountHolder, accountNumber);
         }
-    }
-
-    private User findUserByRegistrationNumber(String registrationNumber) {
-        for (User user : users) {
-            if (user.getRegistrationNumber().equals(registrationNumber)) {
-                return user;
-            }
-        }
-        return null;
     }
 
     private void deposit() {
@@ -111,7 +103,7 @@ public class BankSystem {
     }
 
     private Account findAccountByNumber(String accountNumber) {
-        for (User user : users) {
+        for (User user : customers.getUsers()) {
             for (Account account : user.getAccounts()) {
                 if (account.getAccountNumber().equals(accountNumber)) {
                     return account;
@@ -158,11 +150,7 @@ public class BankSystem {
 
     private void displayAccount() {
         String registrationNumber = InputView.inputRegistrationNumber();
-        User currentUser = findUserByRegistrationNumber(registrationNumber);
+        User currentUser = customers.findUserByRegistrationNumber(registrationNumber);
         OutputView.showAccountInformation(currentUser);
-    }
-
-    public List<User> getUsers() {
-        return this.users;
     }
 }

@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.domain;
 
 public class Account {
     private String accountNumber;
