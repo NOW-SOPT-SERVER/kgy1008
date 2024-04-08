@@ -18,6 +18,7 @@ public class Account {
     }
 
     public void setAmount(Long amount, boolean flag) {
+        validateAmount(amount);
         Long money = this.amount;
         if (flag) {
             this.amount += amount;
@@ -33,7 +34,7 @@ public class Account {
         }
     }
 
-    public static Long validateAmount(Long amount) {
+    private Long validateAmount(Long amount) {
         if (amount >= 0) {
             return amount;
         }

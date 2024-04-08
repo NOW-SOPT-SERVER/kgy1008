@@ -96,20 +96,18 @@ public class BankSystem {
             }
         }
 
-        long money = 0L;
+        long money;
         boolean isValidAmount = false;
         while (!isValidAmount) {
             try {
                 money = InputView.inputMoney(account.getAmount());
-                Account.validateAmount(money);
+                account.setAmount(money,true);
+                OutputView.showDepositSuccess(money, account.getAmount());
                 isValidAmount = true;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
-
-        account.setAmount(money,true);
-        OutputView.showDepositSuccess(money, account.getAmount());
     }
 
     private Account findAccountByNumber(String accountNumber) {
@@ -135,20 +133,18 @@ public class BankSystem {
             }
         }
 
-        long money = 0L;
+        long money;
         boolean isValidAmount = false;
         while (!isValidAmount) {
             try {
                 money = InputView.inputMoney(account.getAmount());
-                Account.validateAmount(money);
+                account.setAmount(money,false);
+                OutputView.showWithdrawSuccess(money, account.getAmount());
                 isValidAmount = true;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
-
-        account.setAmount(money,false);
-        OutputView.showWithdrawSuccess(money, account.getAmount());
     }
 
     public List<User> getUsers() {
