@@ -41,7 +41,7 @@ public class BankSystem {
                 withdraw();
                 break;
             case FOUR:
-
+                accountTransfer();
                 break;
             case FIVE:
                 displayAccount();
@@ -57,7 +57,7 @@ public class BankSystem {
         String accountHolder = InputView.inputName();
         String registrationNumber = InputView.inputRegistrationNumber();
         String accountNumber = UniqueAccountGenerator.generateUniqueAccountNumber();
-        Account account = new Account(accountNumber);
+        Account account = new Account(accountNumber, accountHolder);
         boolean flag = false;
 
         User existingUser = findUserByRegistrationNumber(registrationNumber);
@@ -88,7 +88,7 @@ public class BankSystem {
         String accountNumber;
         Account account = null;
         while (account == null) {
-            accountNumber = InputView.inputAccountNumber();
+            accountNumber = InputView.inputAccountNumber("");
             account = findAccountByNumber(accountNumber);
 
             if (account == null) {
@@ -125,7 +125,7 @@ public class BankSystem {
         String accountNumber;
         Account account = null;
         while (account == null) {
-            accountNumber = InputView.inputAccountNumber();
+            accountNumber = InputView.inputAccountNumber("");
             account = findAccountByNumber(accountNumber);
 
             if (account == null) {
@@ -145,6 +145,15 @@ public class BankSystem {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
+    }
+
+    private void accountTransfer() {
+        Account myAccount = findAccountByNumber(InputView.inputAccountNumber("출금할 "));
+        Account targetAccount = findAccountByNumber(InputView.inputAccountNumber("받는 사람의 "));
+        Long money = InputView.transferMoney(targetAccount);
+        myAccount.setAmount(money,false);
+        targetAccount.setAmount(money,true);
+        OutputView.showTransferInformation(myAccount,targetAccount,money);
     }
 
     private void displayAccount() {

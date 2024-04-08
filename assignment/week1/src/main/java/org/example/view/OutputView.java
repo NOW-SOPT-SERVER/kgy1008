@@ -54,6 +54,13 @@ public class OutputView {
         } else {
             System.out.println(user.getName() + "님은 등록된 계좌가 없습니다.");
         }
+    }
 
+    public static void showTransferInformation(Account myAccount, Account targetAccount, Long money){
+        System.out.println("이체 완료");
+        System.out.println("받는 사람: " + targetAccount.getAccountHolder());
+        System.out.println("보내는 분께 표기: " + myAccount.getAccountHolder());
+        System.out.println("보낸 금액: " + money);
+        System.out.println("남은 금액: " + myAccount.getAmount());
     }
 }

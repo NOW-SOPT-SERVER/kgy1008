@@ -2,10 +2,12 @@ package org.example.repository;
 
 public class Account {
     private String accountNumber;
+    private String accountHolder;
     private Long amount;
 
-    public Account(String accountNumber) {
+    public Account(String accountNumber, String accountHolder) {
         this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
         this.amount = 0L;
     }
 
@@ -15,6 +17,10 @@ public class Account {
 
     public Long getAmount() {
         return this.amount;
+    }
+
+    public String getAccountHolder(){
+        return this.accountHolder;
     }
 
     public void setAmount(Long amount, boolean flag) {
