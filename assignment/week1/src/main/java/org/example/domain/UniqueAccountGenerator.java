@@ -28,7 +28,7 @@ public class UniqueAccountGenerator {
     }
 
     private static boolean isAccountNumberExist(String accountNumber) {
-        CustomerRepository customerRepository = new CustomerRepository();
+        CustomerRepository customerRepository = CustomerRepository.getInstance();
         List<User> users = customerRepository.getUsers();
         for (User user : users) {
             for (Account account : user.getAccounts()) {

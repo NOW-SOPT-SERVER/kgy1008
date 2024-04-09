@@ -5,7 +5,7 @@ import org.example.repository.CustomerRepository;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
-public class DepositService {
+public class DepositService implements IDepositService {
     private CustomerRepository customerRepository;
 
     public DepositService(CustomerRepository customerRepository) {

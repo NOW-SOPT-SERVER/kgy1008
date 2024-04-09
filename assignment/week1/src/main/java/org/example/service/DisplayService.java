@@ -5,7 +5,7 @@ import org.example.repository.CustomerRepository;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
-public class DisplayService {
+public class DisplayService implements IDisplayService {
     private CustomerRepository customerRepository;
 
     public DisplayService(CustomerRepository customerRepository) {

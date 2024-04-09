@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.domain.BankMenu;
-import org.example.domain.User;
 import org.example.repository.CustomerRepository;
 import org.example.service.*;
 import org.example.view.InputView;
@@ -15,14 +14,22 @@ public class BankSystem {
     private TransferService transferService;
     private DisplayService displayService;
 
-    public BankSystem() {
-        this.customers = new CustomerRepository();
-        this.accountService = new AccountService(customers);
-        this.depositService = new DepositService(customers);
-        this.withdrawService = new WithdrawService(customers);
-        this.transferService = new TransferService(customers);
-        this.displayService = new DisplayService(customers);
+    public BankSystem(
+            CustomerRepository customerRepository,
+            AccountService accountService,
+            DepositService depositService,
+            WithdrawService withdrawService,
+            TransferService transferService,
+            DisplayService displayService)
+    {
+        this.customers = customerRepository;
+        this.accountService = accountService;
+        this.depositService = depositService;
+        this.withdrawService = withdrawService;
+        this.transferService = transferService;
+        this.displayService = displayService;
     }
+
     public BankMenu chooseMenu() {
         while (true) {
             try {

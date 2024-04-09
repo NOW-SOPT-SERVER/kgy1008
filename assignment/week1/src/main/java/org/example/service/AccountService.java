@@ -10,7 +10,7 @@ import org.example.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountService {
+public class AccountService implements IAccountService {
     private CustomerRepository customerRepository;
 
     public AccountService(CustomerRepository customerRepository) {

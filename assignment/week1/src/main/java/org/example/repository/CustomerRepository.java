@@ -7,10 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepository {
+    private static CustomerRepository instance;
     private List<User> users;
 
-    public CustomerRepository() {
+    private CustomerRepository() {
         this.users = new ArrayList<>();
+    }
+
+    public static synchronized CustomerRepository getInstance() {
+        if (instance == null) {
+            instance = new CustomerRepository();
+        }
+        return instance;
     }
 
     public User findUserByRegistrationNumber(String registrationNumber) {
