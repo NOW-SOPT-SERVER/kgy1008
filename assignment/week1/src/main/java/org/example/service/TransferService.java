@@ -5,7 +5,7 @@ import org.example.repository.CustomerRepository;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
-public class TransferService implements ITransferService {
+public class TransferService {
     private CustomerRepository customerRepository;
 
     public TransferService(CustomerRepository customerRepository) {

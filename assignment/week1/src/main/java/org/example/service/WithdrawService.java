@@ -5,7 +5,7 @@ import org.example.repository.CustomerRepository;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 
-public class WithdrawService implements IWithdrawService {
+public class WithdrawService {
     private CustomerRepository customerRepository;
     public WithdrawService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;

@@ -1,7 +1,5 @@
 package org.example.domain;
 
-import org.example.domain.Account;
-
 import java.util.List;
 
 public class User {
