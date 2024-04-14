@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,8 @@ public class MemberController {
     public ResponseEntity createMember(
             @RequestBody MemberCreateDto memberCreateDto
     ) {
-        return ResponseEntity.created(URI.create(memberService.createMember(memberCreateDto))).build();
+        return ResponseEntity.created(URI.create(memberService.createMember(memberCreateDto)))
+                .build();
     }
 
     @GetMapping("/{memberId}")
@@ -32,6 +32,7 @@ public class MemberController {
     @DeleteMapping("/{memberId}")
     public ResponseEntity deleteMemberById(@PathVariable Long memberId){
         memberService.deleteMemberById(memberId);
-        return (ResponseEntity) ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
+
 }
