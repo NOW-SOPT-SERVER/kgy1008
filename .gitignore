@@ -68,8 +68,8 @@ atlassian-ide-plugin.xml
 # SonarLint plugin
 .idea/sonarlint/
 
-# application.yml
-application.yml
+# Database
+src/main/resources/application.yml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
