@@ -1,5 +1,6 @@
 package com.example.practice.domain;
 
+import com.example.practice.service.dto.PostCreateRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,13 @@ public class Post extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Blog blog;
 
+    public Post(String name, String content, Blog blog) {
+        this.name = name;
+        this.content = content;
+        this.blog = blog;
+    }
+
+    public static Post create(Blog blog, PostCreateRequest postCreateRequest) {
+        return new Post(postCreateRequest.name(), postCreateRequest.content(), blog);
+    }
 }

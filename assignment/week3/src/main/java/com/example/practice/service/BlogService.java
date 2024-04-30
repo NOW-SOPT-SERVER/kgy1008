@@ -13,11 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class BlogService {
     private final BlogRepository blogRepository;
     private final MemberService memberService;
-
 
     public String create(Long memberId, BlogCreateRequest blogCreateRequest) {
         Member member = memberService.findById(memberId);
@@ -25,7 +23,7 @@ public class BlogService {
         return blog.getId().toString();
     }
 
-    private Blog findById(Long blogId) {
+    public Blog findById(Long blogId) {
         return blogRepository.findById(blogId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.BLOG_NOT_FOUND)
         );
