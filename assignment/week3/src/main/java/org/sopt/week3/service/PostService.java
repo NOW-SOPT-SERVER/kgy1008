@@ -4,10 +4,12 @@ import org.sopt.week3.common.dto.ErrorMessage;
 import org.sopt.week3.domain.Blog;
 import org.sopt.week3.domain.Member;
 import org.sopt.week3.domain.Post;
+import org.sopt.week3.exception.NotFoundException;
 import org.sopt.week3.exception.UnauthorizedAccessException;
 import org.sopt.week3.repository.PostRepository;
 import org.sopt.week3.service.dto.PostCreateRequest;
 import lombok.RequiredArgsConstructor;
+import org.sopt.week3.service.dto.PostFindDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,5 +29,11 @@ public class PostService {
 
         Post post = postRepository.save(Post.create(blog, postCreateRequest));
         return post.getId().toString();
+    }
+
+    public PostFindDto findPostById(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.POST_NOT_FOUND));
+        return PostFindDto.of(post);
     }
 }

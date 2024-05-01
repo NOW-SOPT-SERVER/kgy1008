@@ -28,6 +28,4 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleUnauthorizedActionException(UnauthorizedAccessException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.of(HttpStatus.FORBIDDEN.value(), e.getMessage()));
     }
-
-
 }
