@@ -1,8 +1,10 @@
 package org.sopt.week3.service;
 
+import org.sopt.week3.common.dto.ErrorMessage;
 import org.sopt.week3.domain.Blog;
 import org.sopt.week3.domain.Member;
 import org.sopt.week3.domain.Post;
+import org.sopt.week3.exception.NotFoundException;
 import org.sopt.week3.repository.PostRepository;
 import org.sopt.week3.service.dto.PostCreateRequest;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,11 @@ public class PostService {
     public String create(Long memberId, Long blogId, PostCreateRequest postCreateRequest) {
         Member member = memberService.findById(memberId);
         Blog blog = blogService.findById(blogId);
+
+        if (!blog.getMember().equals(member)){
+            throw new NotFoundException(ErrorMessage.MEMBER_NOT_MATCH);
+        }
+
         Post post = postRepository.save(Post.create(blog, postCreateRequest));
         return post.getId().toString();
     }

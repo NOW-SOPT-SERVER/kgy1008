@@ -2,10 +2,12 @@ package org.sopt.week3.controller;
 
 import org.sopt.week3.common.dto.SuccessMessage;
 import org.sopt.week3.common.dto.SuccessStatusResponse;
+import org.sopt.week3.exception.NotFoundException;
 import org.sopt.week3.service.PostService;
 import org.sopt.week3.service.dto.PostCreateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.sopt.week3.service.dto.PostFindDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
