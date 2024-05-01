@@ -1,10 +1,7 @@
 package org.sopt.week3.controller;
 
-import org.sopt.week3.common.dto.ErrorMessage;
-import org.sopt.week3.common.dto.ErrorResponse;
 import org.sopt.week3.common.dto.SuccessMessage;
 import org.sopt.week3.common.dto.SuccessStatusResponse;
-import org.sopt.week3.exception.NotFoundException;
 import org.sopt.week3.service.PostService;
 import org.sopt.week3.service.dto.PostCreateRequest;
 import jakarta.validation.Valid;
@@ -13,6 +10,8 @@ import org.sopt.week3.service.dto.PostFindDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,4 +36,11 @@ public class PostController {
         PostFindDto post = postService.findPostById(postId);
         return ResponseEntity.ok(SuccessStatusResponse.of(SuccessMessage.POST_FOUND_SUCCESS, post));
     }
+
+    @GetMapping("/blog/{blogId}/posts")
+    public ResponseEntity<SuccessStatusResponse<List<PostFindDto>>> getPostsByBlogId(@PathVariable Long blogId) {
+        List<PostFindDto> posts = postService.findPostsByBlogId(blogId);
+        return ResponseEntity.ok(SuccessStatusResponse.of(SuccessMessage.POSTS_GET_SUCCESS, posts));
+    }
+
 }

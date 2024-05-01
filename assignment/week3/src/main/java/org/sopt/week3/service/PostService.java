@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.week3.service.dto.PostFindDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -35,5 +38,10 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.POST_NOT_FOUND));
         return PostFindDto.of(post);
+    }
+
+    public List<PostFindDto> findPostsByBlogId(Long blogId) {
+        List<Post> posts = postRepository.findByBlogId(blogId);
+        return posts.stream().map(PostFindDto::of).collect(Collectors.toList());
     }
 }
