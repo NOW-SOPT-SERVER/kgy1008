@@ -4,7 +4,7 @@ import org.sopt.week3.common.dto.ErrorMessage;
 import org.sopt.week3.domain.Blog;
 import org.sopt.week3.domain.Member;
 import org.sopt.week3.domain.Post;
-import org.sopt.week3.exception.NotFoundException;
+import org.sopt.week3.exception.UnauthorizedAccessException;
 import org.sopt.week3.repository.PostRepository;
 import org.sopt.week3.service.dto.PostCreateRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class PostService {
         Blog blog = blogService.findById(blogId);
 
         if (!blog.getMember().equals(member)){
-            throw new NotFoundException(ErrorMessage.MEMBER_NOT_MATCH);
+            throw new UnauthorizedAccessException(ErrorMessage.MEMBER_NOT_MATCH);
         }
 
         Post post = postRepository.save(Post.create(blog, postCreateRequest));

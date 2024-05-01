@@ -2,6 +2,7 @@ package org.sopt.week3.common;
 
 import org.sopt.week3.common.dto.ErrorResponse;
 import org.sopt.week3.exception.NotFoundException;
+import org.sopt.week3.exception.UnauthorizedAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,6 +21,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     protected ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.of(HttpStatus.NOT_FOUND.value(),e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.of(HttpStatus.NOT_FOUND.value(), e.getMessage()));
     }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    protected ResponseEntity<ErrorResponse> handleUnauthorizedActionException(UnauthorizedAccessException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.of(HttpStatus.FORBIDDEN.value(), e.getMessage()));
+    }
+
+
 }
