@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,20 +26,15 @@ public class PostService {
     public String create(Long memberId, Long blogId, PostCreateRequest postCreateRequest) {
         Member member = memberService.findById(memberId);
         Blog blog = blogService.findById(blogId);
-
-        if (!checkAuthor(blog, member)) {
-            throw new UnauthorizedAccessException(ErrorMessage.MEMBER_NOT_MATCH);
-        }
-
+        checkAuthor(blog, member);
         Post post = postRepository.save(Post.create(blog, postCreateRequest));
         return post.getId().toString();
     }
 
-    private boolean checkAuthor(Blog blog, Member member) {
-        if (blog.getMember().equals(member)) {
-            return true;
+    private void checkAuthor(Blog blog, Member member) {
+        if (!blog.getMember().equals(member)) {
+            throw new UnauthorizedAccessException(ErrorMessage.MEMBER_NOT_MATCH);
         }
-        return false;
     }
 
     public PostFindDto findPostById(Long postId) {
