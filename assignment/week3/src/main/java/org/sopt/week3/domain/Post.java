@@ -10,6 +10,7 @@ import lombok.Builder;
 @Getter
 @NoArgsConstructor
 public class Post extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

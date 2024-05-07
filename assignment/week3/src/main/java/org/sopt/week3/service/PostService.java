@@ -37,10 +37,14 @@ public class PostService {
         }
     }
 
+    public Post findById(Long postId){
+        return postRepository.findById(postId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.POST_NOT_FOUND)
+        );
+    }
+
     public PostFindDto findPostById(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(
-                () -> new NotFoundException(ErrorMessage.POST_NOT_FOUND));
-        return PostFindDto.of(post);
+        return PostFindDto.of(findById(postId));
     }
 
     public List<PostFindDto> findPostsByBlogId(Long blogId) {
