@@ -1,5 +1,6 @@
 package org.sopt.week6.controller;
 
+import org.sopt.week6.auth.PrincipalHandler;
 import org.sopt.week6.common.dto.SuccessMessage;
 import org.sopt.week6.service.BlogService;
 import org.sopt.week6.service.dto.BlogCreateRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class BlogController {
 
     private final BlogService blogService;
+    private final PrincipalHandler principalHandler;
 
     @PostMapping("/blog")
     public ResponseEntity<SuccessStatusResponse> createBlog(
@@ -24,12 +26,14 @@ public class BlogController {
             @RequestBody BlogCreateRequest blogCreateRequest
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", blogService.create(memberId, blogCreateRequest))
+                .header("Location", blogService.create(
+                        principalHandler.getUserIdFromPrincipal(), blogCreateRequest
+                ))
                 .body(SuccessStatusResponse.of(SuccessMessage.BLOG_CREATE_SUCCESS));
     }
 
     @PatchMapping("/blog/{blogId}/title")
-    public ResponseEntity updateBlogTitle(
+    public ResponseEntity<Void> updateBlogTitle(
             @PathVariable Long blogId,
             @Valid @RequestBody BlogTitleUpdateRequest blogTitleUpdateRequest
     ) {

@@ -17,6 +17,7 @@ public class BlogService {
     private final BlogRepository blogRepository;
     private final MemberService memberService;
 
+    @Transactional
     public String create(Long memberId, BlogCreateRequest blogCreateRequest) {
         Member member = memberService.findById(memberId);
         Blog blog = blogRepository.save(Blog.create(member, blogCreateRequest));
