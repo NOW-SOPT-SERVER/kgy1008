@@ -18,7 +18,7 @@ public class JwtTokenProvider {
     private static final String USER_ID = "userId";
 
     private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L;  // 엑서스 토큰 만료 기간
-    private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L * 14;  // 리프레시 토큰 만료 기간
+    private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L * 7;  // 리프레시 토큰 만료 기간
 
     @Value("${jwt.secret}")
     private String JWT_SECRET;
