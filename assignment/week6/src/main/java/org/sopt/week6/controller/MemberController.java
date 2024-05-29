@@ -13,13 +13,13 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members")
+@RequestMapping("/api/v1")
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping
-    public ResponseEntity<UserJoinResponse> postMember(
+    @PostMapping("/members")
+    public ResponseEntity<UserJoinResponse> createMember(
             @RequestBody MemberCreateDto memberCreate
     ) {
         UserJoinResponse userJoinResponse = memberService.createMember(memberCreate);
