@@ -20,7 +20,7 @@ public class BlogController {
     private final BlogService blogService;
     private final PrincipalHandler principalHandler;
 
-    @PostMapping("/blog")
+    @PostMapping("/blogs")
     public ResponseEntity<SuccessStatusResponse> createBlog(
             @RequestHeader(name = "memberId") Long memberId,
             @RequestBody BlogCreateRequest blogCreateRequest
@@ -32,7 +32,7 @@ public class BlogController {
                 .body(SuccessStatusResponse.of(SuccessMessage.BLOG_CREATE_SUCCESS));
     }
 
-    @PatchMapping("/blog/{blogId}/title")
+    @PatchMapping("/blogs/{blogId}/title")
     public ResponseEntity<Void> updateBlogTitle(
             @PathVariable Long blogId,
             @Valid @RequestBody BlogTitleUpdateRequest blogTitleUpdateRequest

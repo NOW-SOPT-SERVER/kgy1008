@@ -20,7 +20,7 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping("/post")
+    @PostMapping("/posts")
     public ResponseEntity<SuccessStatusResponse> createPost(
             @RequestHeader(name = "memberId") Long memberId,
             @RequestHeader(name = "blogId") Long blogId,
@@ -31,7 +31,7 @@ public class PostController {
                 .body(SuccessStatusResponse.of(SuccessMessage.POST_CREATE_SUCCESS));
     }
 
-    @GetMapping("/post/{postId}")
+    @GetMapping("/posts/{postId}")
     public ResponseEntity<SuccessStatusResponse<PostFindDto>> getPostById(@PathVariable Long postId) {
         PostFindDto post = postService.findPostById(postId);
         return ResponseEntity.ok(SuccessStatusResponse.of(SuccessMessage.POST_FOUND_SUCCESS, post));
