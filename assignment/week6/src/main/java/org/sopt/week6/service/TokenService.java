@@ -32,9 +32,6 @@ public class TokenService {
 
         Token token = tokenRepository.findByRefreshToken(refreshToken);
 
-        System.out.println(token.getRefreshToken());
-        System.out.println(refreshToken);
-
         if (refreshToken.equals(token.getRefreshToken())) {
             String accessToken = generateAccessToken(member.getId());
             return UserJoinResponse.of(accessToken, refreshToken, member.getId());
