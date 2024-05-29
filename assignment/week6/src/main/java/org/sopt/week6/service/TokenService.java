@@ -14,6 +14,8 @@ import org.sopt.week6.service.dto.UserJoinResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.sopt.week6.common.jwt.JwtValidationType.VALID_JWT;
+
 @Service
 @RequiredArgsConstructor
 public class TokenService {
@@ -32,7 +34,7 @@ public class TokenService {
 
         Token token = tokenRepository.findByRefreshToken(refreshToken);
 
-        if (refreshToken.equals(token.getRefreshToken())) {
+        if (refreshToken.equals(token.getRefreshToken()) && jwtTokenProvider.validateToken(refreshToken) == VALID_JWT) {
             String accessToken = generateAccessToken(member.getId());
             return UserJoinResponse.of(accessToken, refreshToken, member.getId());
         }
