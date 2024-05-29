@@ -24,14 +24,21 @@ public class MemberService {
     public UserJoinResponse createMember(
             MemberCreateDto memberCreate
     ) {
-        Member member =  Member.create(memberCreate.name(), memberCreate.part(), memberCreate.age());
+        Member member =  Member.create(
+                memberCreate.name(),
+                memberCreate.part(),
+                memberCreate.age()
+        );
         memberRepository.save(member);
 
         Long memberId = member.getId();
         String accessToken = jwtTokenProvider.issueAccessToken(
                 UserAuthentication.createUserAuthentication(memberId)
         );
-        return UserJoinResponse.of(accessToken, memberId.toString());
+        String refreshToken = jwtTokenProvider.issueRefreshToken(
+                UserAuthentication.createUserAuthentication(memberId)
+        );
+        return UserJoinResponse.of(accessToken, refreshToken, memberId.toString());
     }
 
     public Member findById(Long memberId){
