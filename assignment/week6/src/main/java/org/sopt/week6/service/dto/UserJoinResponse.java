@@ -1,15 +1,18 @@
 package org.sopt.week6.service.dto;
 
-public record UserJoinResponse(
-        String accessToken,
-        String refreshToken,
-        String userId
-) {
+import jakarta.validation.constraints.NotNull;
 
+public record UserJoinResponse(
+        @NotNull
+        String accessToken,
+        @NotNull
+        String refreshToken,
+        Long userId
+) {
     public static UserJoinResponse of(
             String accessToken,
             String refreshToken,
-            String userId
+            Long userId
     ) {
         return new UserJoinResponse(accessToken, refreshToken, userId);
     }
