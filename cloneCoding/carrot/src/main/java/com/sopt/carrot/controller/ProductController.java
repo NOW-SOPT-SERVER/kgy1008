@@ -21,7 +21,7 @@ public class ProductController {
     public ResponseEntity<SuccessStatusResponse> createProduct(
             @RequestHeader(name = "memberId") Long memberId,
             @RequestHeader(name = "regionId") Long regionId,
-            @Valid @RequestBody ProductCreateRequest productCreateRequest
+            @ModelAttribute ProductCreateRequest productCreateRequest
             ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header("Location", productService.createProduct(memberId, regionId, productCreateRequest))
