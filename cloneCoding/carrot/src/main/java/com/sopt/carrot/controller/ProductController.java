@@ -35,7 +35,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(SuccessStatusResponse.of(
                         SuccessMessage.PRODUCT_GET_SUCCESS.getMessage(),
-                        productService.getProductByRegionId(regionId))
-                );
+                        productService.getProductByRegionId(regionId)));
     }
 }
