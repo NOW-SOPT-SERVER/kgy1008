@@ -37,4 +37,13 @@ public class ProductController {
                         SuccessMessage.PRODUCT_GET_SUCCESS.getMessage(),
                         productService.getProductByRegionId(regionId)));
     }
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<SuccessStatusResponse> deleteProduct(
+            @PathVariable Long productId,
+            @RequestHeader Long memberId
+    ) {
+        productService.deleteProduct(productId, memberId);
+        return ResponseEntity.ok(SuccessStatusResponse.of(SuccessMessage.PRODUCT_DELETE_SUCCESS.getMessage()));
+    }
 }

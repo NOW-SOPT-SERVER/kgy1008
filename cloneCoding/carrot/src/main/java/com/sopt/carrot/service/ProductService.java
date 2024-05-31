@@ -6,6 +6,7 @@ import com.sopt.carrot.domain.Region;
 import com.sopt.carrot.domain.Member;
 import com.sopt.carrot.dto.ProductCreateRequest;
 import com.sopt.carrot.dto.ProductGetResponse;
+import com.sopt.carrot.exception.AuthorizationException;
 import com.sopt.carrot.exception.NotFoundException;
 import com.sopt.carrot.external.S3Service;
 import com.sopt.carrot.repository.ProductRepository;
@@ -62,5 +63,23 @@ public class ProductService {
         return products.stream()
                 .map(ProductGetResponse::of)
                 .toList();
+    }
+
+    @Transactional
+    public void deleteProduct(Long productId, Long memberId) {
+        Product product = productRepository.findById(productId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.PRODUCT_NOT_FOUND)
+        );
+
+        if (!product.getMember().getId().equals(memberId)) {
+            throw new AuthorizationException(ErrorMessage.UNAUTHORIZED_MEMBER);
+        }
+
+        try {
+            s3Service.deleteImage(product.getImageUrl());
+            productRepository.delete(product);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
