@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum SuccessMessage {
 
     PRODUCT_CREATE_SUCCESS("상품 등록 성공"),
+    PRODUCT_GET_SUCCESS("지역 별 상품 조회 성공"),
     ;
 
     private final String message;
