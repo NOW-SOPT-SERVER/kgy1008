@@ -28,22 +28,26 @@ public class Product {
 
     private String description;
 
+    private String imageUrl;
+
     @Builder
-    public Product(Member member, Region region, String productName, int price, String description) {
+    public Product(Member member, Region region, String productName, int price, String description, String imageUrl) {
         this.member = member;
         this.region = region;
         this.productName = productName;
         this.price = price;
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 
-    public static Product createProduct(Member member, Region region, ProductCreateRequest productCreateRequest) {
+    public static Product createProduct(Member member, Region region, String productName, int price, String description, String imageUrl) {
         return Product.builder()
                 .member(member)
                 .region(region)
-                .productName(productCreateRequest.title())
-                .price(productCreateRequest.price())
-                .description(productCreateRequest.description())
+                .productName(productName)
+                .price(price)
+                .description(description)
+                .imageUrl(imageUrl)
                 .build();
     }
 }
